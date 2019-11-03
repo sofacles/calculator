@@ -6,12 +6,12 @@ import Key from "./Key";
 
 const NumberKey = (props) => {
     //const {state, dispatch} = UseCalcReducer();
-    const [state, setState] = useContext(calculatorContext)
+    let [state, dispatch] = useContext(calculatorContext)
     const onPress = () => {
         debugger;
-        //dispatch({ type: "DIGIT", payload: props.number});
-        setState({...state,
-            stringCurrentlyBeingConcatenated: state.stringCurrentlyBeingConcatenated.concat(props.number)});
+        dispatch({ type: "DIGIT", payload: props.number});
+        // setState({...state,
+        //     stringCurrentlyBeingConcatenated: state.stringCurrentlyBeingConcatenated.concat(props.number)});
     };
 
     return <>

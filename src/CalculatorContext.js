@@ -1,14 +1,14 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useReducer } from "react";
 import InitialState from "./store/InitialState";
-
+import CalcReducer from "./store/CalcReducer";
 
 
 const calculatorContext = createContext([{}, () => {}]);
 
 const CalculatorContextProvider = (props) => {
-    const [state, setState] = useState({stringCurrentlyBeingConcatenated: "0"});
+    const [state, dispatch] = useReducer(CalcReducer, InitialState());
     debugger;
-    return <calculatorContext.Provider value={[state, setState]} >
+    return <calculatorContext.Provider value={[state, dispatch]} >
         {props.children}
     </calculatorContext.Provider>
 
