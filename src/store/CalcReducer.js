@@ -14,7 +14,7 @@ and the operand and the termToBeApplied and does some kind of math
 const CalcReducer = (state, action) => {
     
   switch (action.type) {
-    case "Digit": {
+    case "DIGIT": {
       if (state.termToBeApplied === 0) {
         //then we're still building up the first number, the first operand
         return {
@@ -30,5 +30,6 @@ const CalcReducer = (state, action) => {
     default: return state;
   }
 };
+
 
 export default CalcReducer;

@@ -10,12 +10,17 @@ const Key = (props) => {
     const KeyStyle = {
         border: "1px solid black",
         borderRadius: "2px",
+        display: "flex",
+        justifyContent: "center",
         padding: "10px",
         margin: "3px",
         flexGrow: "1",
         flexBasis: "10px"
     }
-    return <div style={ props.wide ? {...KeyStyle, ...doubleWideStyle} : KeyStyle  }>{props.operand}</div>
+    return <div 
+        style={ props.wide ? {...KeyStyle, ...doubleWideStyle} : KeyStyle  }
+        onClick={props.onPress}
+        >{props.operand}</div>
 };
 
 export default Key;
