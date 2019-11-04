@@ -15,22 +15,59 @@ const CalcReducer = (state, action) => {
     
   switch (action.type) {
     case "DIGIT": {
+      let trimmed = state.stringCurrentlyBeingConcatenated;
       if (state.termToBeApplied === 0) {
         //then we're still building up the first number, the first operand
         //get rid of trailing zeroes
-        let trimmed = state.stringCurrentlyBeingConcatenated;
+        
         while (trimmed[0] == "0") {
             trimmed = trimmed.slice(1);
         }
+      }
+      // This should only happen on the first key after an operation key has been pressed 
+      if(parseInt(state.stringCurrentlyBeingConcatenated) === state.termToBeApplied) {
         return {
           ...state,
-          stringCurrentlyBeingConcatenated: trimmed.concat(
-            action.payload
-          )
+          stringCurrentlyBeingConcatenated: "" + action.payload
+        };
+      }
+
+      return {
+        ...state,
+        stringCurrentlyBeingConcatenated: trimmed.concat(
+          action.payload
+        )
+      };
+      break;
+    }
+
+    case "ADD": {
+        if (state.termToBeApplied === 0) {
+            return {
+                ...state,
+                termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
+                operand: "ADD"
+            };
+        }
+        break;
+    }
+
+    case "ENTER": {
+      if (state.operand === "") {
+          return {
+              ...state
+          };
+      }
+      if(state.operand === "ADD") {
+        let sum = state.termToBeApplied + parseInt(state.stringCurrentlyBeingConcatenated);
+        return {
+          ...state,
+          termToBeApplied: sum,
+          stringCurrentlyBeingConcatenated: sum + "" 
         };
       }
       break;
-    }
+  }
 
     default: return state;
   }

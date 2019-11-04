@@ -1,5 +1,7 @@
 import React from "react";
 import NumberKey from "./NumberKey";
+import EnterKey from "./EnterKey"
+import AdditionKey from "./AdditionKey";
 import Key from "./Key";
 
 const KeyPad = () => {
@@ -41,8 +43,8 @@ const KeyPad = () => {
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={0} key={0} />
-            <Key operand={"enter"} key="enter" />
-            <Key operand={"+"} key={"plus"} />
+            <EnterKey key="enter" />
+            <AdditionKey key={"plus"} />
         </div>
     </div>;
 };
