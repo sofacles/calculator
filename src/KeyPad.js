@@ -21,8 +21,7 @@ const KeyPad = () => {
    
 
     return <div style={CalculatorStyle}>
-        <NumberKey number={7} key={7} />
-        {/* <div style={KeyPadRowStyle}>
+        <div style={KeyPadRowStyle}>
             <NumberKey number={7} key={7} />
             <NumberKey number={8} key={8} />
             <NumberKey number={9} key={9} />
@@ -44,7 +43,7 @@ const KeyPad = () => {
             <NumberKey number={0} key={0} />
             <Key operand={"enter"} key="enter" />
             <Key operand={"+"} key={"plus"} />
-        </div> */}
+        </div>
     </div>;
 };
 
