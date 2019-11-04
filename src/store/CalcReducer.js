@@ -17,9 +17,14 @@ const CalcReducer = (state, action) => {
     case "DIGIT": {
       if (state.termToBeApplied === 0) {
         //then we're still building up the first number, the first operand
+        //get rid of trailing zeroes
+        let trimmed = state.stringCurrentlyBeingConcatenated;
+        while (trimmed[0] == "0") {
+            trimmed = trimmed.slice(1);
+        }
         return {
           ...state,
-          stringCurrentlyBeingConcatenated: state.stringCurrentlyBeingConcatenated.concat(
+          stringCurrentlyBeingConcatenated: trimmed.concat(
             action.payload
           )
         };
