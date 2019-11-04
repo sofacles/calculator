@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import Calculator from "./Calculator";
 import './App.css';
 

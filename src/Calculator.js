@@ -1,8 +1,7 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Keypad from "./KeyPad";
 import Display from "./Display";
 import { CalculatorContextProvider } from "./CalculatorContext";
-import InitialState from "./store/InitialState";
 
 const Calculator = () => {
   const calculatorStyle = {

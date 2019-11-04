@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { calculatorContext } from "./CalculatorContext";
 
 const Display = () => {
-  let [state, setState] = useContext(calculatorContext);
+  let [state] = useContext(calculatorContext);
   const displayStyle = {
     border: "1px solid #333",
     height: "20px",
