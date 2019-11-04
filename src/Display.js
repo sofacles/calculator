@@ -9,7 +9,7 @@ const Display = () => {
     margin: "4px"
   };
   return (
-    <div style={displayStyle}>{state.stringCurrentlyBeingConcatenated}</div>
+    <div data-testid="display" style={displayStyle}>{state.stringCurrentlyBeingConcatenated}</div>
   );
 };
 
