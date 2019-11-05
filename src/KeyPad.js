@@ -33,13 +33,13 @@ const KeyPad = () => {
             <NumberKey number={4} key={4} />
             <NumberKey number={5} key={5} />
             <NumberKey number={6} key={6} />
-            <Key text={"*"} key={"multiply"} />
+            <OperationKey opCode="MULTIPLY" text="*" key="multiply" />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={1} key={1} />
             <NumberKey number={2} key={2} />
             <NumberKey number={3} key={3} />
-            <OperationKey opCode="SUBTRACT" text="-" key="minus" />
+            <OperationKey text="-" opCode="SUBTRACT" key={"subtract"} />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={0} key={0} />

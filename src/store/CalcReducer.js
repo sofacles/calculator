@@ -40,23 +40,14 @@ const CalcReducer = (state, action) => {
       break;
     }
 
-    case "ADD": {
+    case "ADD":
+    case "SUBTRACT":
+    case "MULTIPLY": {
       if (state.termToBeApplied === 0) {
         return {
           ...state,
           termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
-          operand: "ADD"
-        };
-      }
-      break;
-    }
-
-    case "SUBTRACT": {
-      if (state.termToBeApplied === 0) {
-        return {
-          ...state,
-          termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
-          operand: "SUBTRACT"
+          operand: action.type
         };
       }
       break;
@@ -88,9 +79,22 @@ const CalcReducer = (state, action) => {
           stringCurrentlyBeingConcatenated: difference + ""
         };
       }
+
+      if (state.operand === "MULTIPLY") {
+        let product =
+          state.termToBeApplied *
+          parseInt(state.stringCurrentlyBeingConcatenated);
+        return {
+          ...state,
+          termToBeApplied: product,
+          stringCurrentlyBeingConcatenated: product + ""
+        };
+      }
       break;
     }
 
+
+    
     default:
       return state;
   }

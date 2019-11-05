@@ -6,7 +6,9 @@ const Display = () => {
   const displayStyle = {
     border: "1px solid #333",
     height: "20px",
-    margin: "4px"
+    margin: "4px",
+    padding: "4px",
+    textAlign: "right"
   };
   return (
     <div data-testid="display" style={displayStyle}>{state.stringCurrentlyBeingConcatenated}</div>

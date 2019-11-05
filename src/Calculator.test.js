@@ -27,38 +27,92 @@ describe("Calculator tests", () => {
   describe("Addition: ", () => {
     it("two plus two is four", () => {
       const { queryByText, getByTestId } = render(<Calculator />);
-      let twoKey = queryByText("2");
+      const twoKey = queryByText("2");
       fireEvent.click(twoKey);
 
-      let plusKey = queryByText("+");
+      const plusKey = queryByText("+");
       fireEvent.click(plusKey);
 
       fireEvent.click(twoKey);
 
-      let enterKey = queryByText("enter");
+      const enterKey = queryByText("enter");
       fireEvent.click(enterKey);
 
-      let display = getByTestId("display");
+      const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("4");
+    });
+
+    it("can add multi-digit numbers", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      const twoKey = queryByText("2");
+      fireEvent.click(twoKey);
+      fireEvent.click(twoKey);
+
+      const plusKey = queryByText("+");
+      fireEvent.click(plusKey);
+
+      const oneKey = getByTestId("1key");
+      const zeroKey = getByTestId("0key")
+      fireEvent.click(oneKey);
+      fireEvent.click(zeroKey);
+      fireEvent.click(oneKey);
+
+      const enterKey = queryByText("enter");
+      fireEvent.click(enterKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("123");
     });
   });
 
   describe("Subtraction: ", () => {
     it("8 minus two is 6", () => {
+        const { queryByText, getByTestId } = render(<Calculator />);
+        const eightKey = getByTestId("8key");
+        fireEvent.click(eightKey);
+  
+        const minusKey = getByTestId("-key");
+        fireEvent.click(minusKey);
+  
+        fireEvent.click(getByTestId("2key"));
+  
+        const enterKey = queryByText("enter");
+        fireEvent.click(enterKey);
+  
+        const display = getByTestId("display");
+        expect(getNodeText(display)).toEqual("6");
+      });
+
+      it("6 minus 8 is negative two", () => {
+        const { queryByText, getByTestId } = render(<Calculator />);
+        fireEvent.click(getByTestId("6key"));
+        fireEvent.click(getByTestId("-key"));
+        fireEvent.click(getByTestId("8key"));
+        
+        fireEvent.click(queryByText("enter"));
+  
+        const display = getByTestId("display");
+        expect(getNodeText(display)).toEqual("-2");
+      });
+  });
+
+  describe("Multiplication: ", () => {
+    it("3 times 7 is 21", () => {
       const { queryByText, getByTestId } = render(<Calculator />);
-      let eightKey = getByTestId("8key");
-      fireEvent.click(eightKey);
+      let key3 = getByTestId("3key");
+      fireEvent.click(key3);
 
-      let minusKey = getByTestId("-key");
-      fireEvent.click(minusKey);
+      const timesKey = getByTestId("*key");
+      fireEvent.click(timesKey);
 
-      fireEvent.click(getByTestId("2key"));
+      const key7 = getByTestId("7key");
+      fireEvent.click(key7);
 
-      let enterKey = queryByText("enter");
+      const enterKey = queryByText("enter");
       fireEvent.click(enterKey);
 
-      let display = getByTestId("display");
-      expect(getNodeText(display)).toEqual("6");
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("21");
     });
   });
 });
