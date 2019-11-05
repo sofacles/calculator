@@ -39,12 +39,12 @@ const KeyPad = () => {
             <NumberKey number={1} key={1} />
             <NumberKey number={2} key={2} />
             <NumberKey number={3} key={3} />
-            <Key text={"-"} key={"minus"} />
+            <OperationKey opCode="SUBTRACT" text="-" key="minus" />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={0} key={0} />
             <EnterKey key="enter" />
-            <OperationKey opCode="ADD" key={"plus"} />
+            <OperationKey text="+" opCode="ADD" key={"plus"} />
         </div>
     </div>;
 };

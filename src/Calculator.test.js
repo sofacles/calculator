@@ -52,7 +52,7 @@ describe("Calculator tests", () => {
       let minusKey = getByTestId("-key");
       fireEvent.click(minusKey);
 
-      let twoKey = getByTestId("2key");
+      fireEvent.click(getByTestId("2key"));
 
       let enterKey = queryByText("enter");
       fireEvent.click(enterKey);

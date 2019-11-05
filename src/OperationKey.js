@@ -9,7 +9,7 @@ const OperationKey = (props) => {
     }
     return (
         <>
-            <Key text="+" onPress={onPress} />
+            <Key text={props.text} onPress={onPress} />
         </>
     );
 };
