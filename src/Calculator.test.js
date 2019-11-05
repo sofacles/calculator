@@ -4,15 +4,15 @@ import { getNodeText } from "@testing-library/dom";
 import Calculator from "./Calculator";
 
 describe("Calculator tests", () => {
-  afterEach(cleanup);
   it("updates display when you click 1", () => {
-    let { queryByText, getByTestId } = render(<Calculator />);
-    let oneKey = queryByText("1");
+    let { getByTestId } = render(<Calculator />);
+    let oneKey = getByTestId("1key");
     fireEvent.click(oneKey);
 
     const display = getByTestId("display");
     expect(getNodeText(display)).toEqual("1");
   });
+
   it("updates display when you click 1,0", () => {
     let { queryByText, getByTestId } = render(<Calculator />);
     let oneKey = queryByText("1");
@@ -46,13 +46,13 @@ describe("Calculator tests", () => {
   describe("Subtraction: ", () => {
     it("8 minus two is 6", () => {
       const { queryByText, getByTestId } = render(<Calculator />);
-      let eightKey = queryByText("2");
+      let eightKey = getByTestId("8key");
       fireEvent.click(eightKey);
 
-      let minusKey = queryByText("-");
+      let minusKey = getByTestId("-key");
       fireEvent.click(minusKey);
 
-      let twoKey = queryByText("2");
+      let twoKey = getByTestId("2key");
 
       let enterKey = queryByText("enter");
       fireEvent.click(enterKey);

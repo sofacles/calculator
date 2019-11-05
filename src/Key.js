@@ -19,8 +19,9 @@ const Key = (props) => {
     }
     return <div 
         style={ props.wide ? {...KeyStyle, ...doubleWideStyle} : KeyStyle  }
+        data-testid={props.text + "key"}
         onClick={props.onPress}
-        >{props.operand}</div>
+        >{props.text}</div>
 };
 
 export default Key;

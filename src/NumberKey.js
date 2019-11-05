@@ -10,7 +10,7 @@ const NumberKey = (props) => {
     };
 
     return <>
-         <Key onPress={onPress} operand={props.number} />
+         <Key onPress={onPress} text={props.number} />
     </>;
 }
 

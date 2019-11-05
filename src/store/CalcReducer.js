@@ -20,7 +20,7 @@ const CalcReducer = (state, action) => {
         //then we're still building up the first number, the first operand
         //get rid of trailing zeroes
         
-        while (trimmed[0] == "0") {
+        while (trimmed[0] === "0") {
             trimmed = trimmed.slice(1);
         }
       }

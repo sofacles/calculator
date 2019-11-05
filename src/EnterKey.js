@@ -10,7 +10,7 @@ export default (props) => {
     };
 
     return <>
-         <Key onPress={onPress} operand="enter" />
+         <Key onPress={onPress} text="enter" />
     </>;
 }
 

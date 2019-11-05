@@ -1,7 +1,7 @@
 import React from "react";
 import NumberKey from "./NumberKey";
 import EnterKey from "./EnterKey"
-import AdditionKey from "./AdditionKey";
+import OperationKey from "./OperationKey";
 import Key from "./Key";
 
 const KeyPad = () => {
@@ -27,24 +27,24 @@ const KeyPad = () => {
             <NumberKey number={7} key={7} />
             <NumberKey number={8} key={8} />
             <NumberKey number={9} key={9} />
-            <Key operand={"/"} key={"divide"} />
+            <Key text={"/"} key={"divide"} />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={4} key={4} />
             <NumberKey number={5} key={5} />
-            <NumberKey number={8} key={6} />
-            <Key operand={"*"} key={"multiply"} />
+            <NumberKey number={6} key={6} />
+            <Key text={"*"} key={"multiply"} />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={1} key={1} />
             <NumberKey number={2} key={2} />
             <NumberKey number={3} key={3} />
-            <Key operand={"-"} key={"minus"} />
+            <Key text={"-"} key={"minus"} />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={0} key={0} />
             <EnterKey key="enter" />
-            <AdditionKey key={"plus"} />
+            <OperationKey opCode="ADD" key={"plus"} />
         </div>
     </div>;
 };
