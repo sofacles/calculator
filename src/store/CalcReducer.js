@@ -20,28 +20,20 @@ const CalcReducer = (state, action) => {
   switch (action.type) {
     case "DIGIT": {
       let trimmed = state.stringCurrentlyBeingConcatenated;
-      if (state.termToBeApplied === 0) {
-        //then we're still building up the first number, the first operand
-        //get rid of trailing zeroes
-
-        while (trimmed[0] === "0") {
-          trimmed = trimmed.slice(1);
-        }
-      }
-      // This should only happen on the first key after an operation key has been pressed
-      if (
-        parseInt(state.stringCurrentlyBeingConcatenated) ===
-        state.termToBeApplied
-      ) {
-        return {
-          ...state,
-          stringCurrentlyBeingConcatenated: "" + action.payload
-        };
+      
+      //get rid of trailing zeroes
+      while (trimmed[0] === "0") {
+        trimmed = trimmed.slice(1);
       }
 
+      // If they've entered one term already and an operand and this is the first digit of the new term, we need to reset the 
+      // stringCurrentlyBeingConcatenated before we append the new digit.
+      const newStringToAddTo = state.preparingToClearDisplayOnNextDigit ? "" : trimmed;
+        
       return {
         ...state,
-        stringCurrentlyBeingConcatenated: trimmed.concat(action.payload)
+        stringCurrentlyBeingConcatenated: newStringToAddTo.concat(action.payload),
+        preparingToClearDisplayOnNextDigit: false
       };
     }
 
@@ -52,7 +44,8 @@ const CalcReducer = (state, action) => {
         return {
           ...state,
           termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
-          operand: action.type
+          operand: action.type,
+          preparingToClearDisplayOnNextDigit: true
         };
       } else {
         //We already have one term, so this is kind of like hitting the enter key

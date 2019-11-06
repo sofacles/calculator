@@ -3,7 +3,8 @@ const initializeState = () => {
         runningTotal: 0,
         stringCurrentlyBeingConcatenated: "0",
         termToBeApplied: 0,
-        operand: ""
+        operand: "",
+        preparingToClearDisplayOnNextDigit: false
       };
 };
 

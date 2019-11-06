@@ -24,6 +24,53 @@ describe("Calculator tests", () => {
     const display = getByTestId("display");
     expect(getNodeText(display)).toEqual("10");
   });
+
+  describe("Trimming leading zeros:", () => {
+    it("Ignores zeros until you enter non-zero", () => {
+      const { getByTestId } = render(<Calculator />);
+      const zeroKey = getByTestId("0key");
+      fireEvent.click(zeroKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("0");
+
+      fireEvent.click(zeroKey);
+      expect(getNodeText(display)).toEqual("0");
+
+      fireEvent.click(getByTestId("5key"));
+      expect(getNodeText(display)).toEqual("5");
+    });
+
+    it("Does not ignore zeros in the middle of the number", () => {
+      const { getByTestId } = render(<Calculator />);
+      const threeKey = getByTestId("3key");
+      fireEvent.click(threeKey);
+      const zeroKey = getByTestId("0key");
+      fireEvent.click(zeroKey);
+      fireEvent.click(threeKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("303");
+    });
+
+    it("Ignores leading zeros in second term", () => {
+      const { getByTestId } = render(<Calculator />);
+      const threeKey = getByTestId("3key");
+      fireEvent.click(threeKey);
+
+      const plusKey = getByTestId("+key");
+      fireEvent.click(plusKey);
+
+      const zeroKey = getByTestId("0key");
+      fireEvent.click(zeroKey);
+      fireEvent.click(threeKey);
+      fireEvent.click(zeroKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("30");
+    });
+  });
+
   describe("Addition: ", () => {
     it("two plus two is four", () => {
       const { queryByText, getByTestId } = render(<Calculator />);
@@ -52,7 +99,7 @@ describe("Calculator tests", () => {
       fireEvent.click(plusKey);
 
       const oneKey = getByTestId("1key");
-      const zeroKey = getByTestId("0key")
+      const zeroKey = getByTestId("0key");
       fireEvent.click(oneKey);
       fireEvent.click(zeroKey);
       fireEvent.click(oneKey);
@@ -63,37 +110,53 @@ describe("Calculator tests", () => {
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("123");
     });
+
+    it("doesn't clear the display after an operation, but waits for the first digit of new operand", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      const twoKey = queryByText("2");
+      fireEvent.click(twoKey);
+
+      const plusKey = queryByText("+");
+      fireEvent.click(plusKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("2");
+
+      fireEvent.click(getByTestId("7key"));
+
+      expect(getNodeText(display)).toEqual("7");
+    });
   });
 
   describe("Subtraction: ", () => {
     it("8 minus two is 6", () => {
-        const { queryByText, getByTestId } = render(<Calculator />);
-        const eightKey = getByTestId("8key");
-        fireEvent.click(eightKey);
-  
-        const minusKey = getByTestId("-key");
-        fireEvent.click(minusKey);
-  
-        fireEvent.click(getByTestId("2key"));
-  
-        const enterKey = queryByText("enter");
-        fireEvent.click(enterKey);
-  
-        const display = getByTestId("display");
-        expect(getNodeText(display)).toEqual("6");
-      });
+      const { queryByText, getByTestId } = render(<Calculator />);
+      const eightKey = getByTestId("8key");
+      fireEvent.click(eightKey);
 
-      it("6 minus 8 is negative two", () => {
-        const { queryByText, getByTestId } = render(<Calculator />);
-        fireEvent.click(getByTestId("6key"));
-        fireEvent.click(getByTestId("-key"));
-        fireEvent.click(getByTestId("8key"));
-        
-        fireEvent.click(queryByText("enter"));
-  
-        const display = getByTestId("display");
-        expect(getNodeText(display)).toEqual("-2");
-      });
+      const minusKey = getByTestId("-key");
+      fireEvent.click(minusKey);
+
+      fireEvent.click(getByTestId("2key"));
+
+      const enterKey = queryByText("enter");
+      fireEvent.click(enterKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("6");
+    });
+
+    it("6 minus 8 is negative two", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      fireEvent.click(getByTestId("6key"));
+      fireEvent.click(getByTestId("-key"));
+      fireEvent.click(getByTestId("8key"));
+
+      fireEvent.click(queryByText("enter"));
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("-2");
+    });
   });
 
   describe("Multiplication: ", () => {

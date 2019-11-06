@@ -5,7 +5,8 @@ const UpdateTermToBeApplied = state => {
     return {
       ...state,
       termToBeApplied: sum,
-      stringCurrentlyBeingConcatenated: sum + ""
+      stringCurrentlyBeingConcatenated: sum + "",
+      preparingToClearDisplayOnNextDigit: true
     };
   }
   if (state.operand === "SUBTRACT") {
@@ -14,7 +15,8 @@ const UpdateTermToBeApplied = state => {
     return {
       ...state,
       termToBeApplied: difference,
-      stringCurrentlyBeingConcatenated: difference + ""
+      stringCurrentlyBeingConcatenated: difference + "",
+      preparingToClearDisplayOnNextDigit: true
     };
   }
 
@@ -24,7 +26,8 @@ const UpdateTermToBeApplied = state => {
     return {
       ...state,
       termToBeApplied: product,
-      stringCurrentlyBeingConcatenated: product + ""
+      stringCurrentlyBeingConcatenated: product + "",
+      preparingToClearDisplayOnNextDigit: true
     };
   }
 };
