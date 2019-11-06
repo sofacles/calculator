@@ -1,3 +1,5 @@
+import {UpdateTermToBeApplied} from "./ReducerHelper"
+
 /*
 If I had just typed <2>, <3>, <+> 
 running total would be 23
@@ -11,6 +13,10 @@ and the operand and the termToBeApplied and does some kind of math
 */
 
 const CalcReducer = (state, action) => {
+  // The "termToBeApplied" is the left hand side of whatever last operator is. It is the result of all the 
+  // operations up until now.  I am ignoring Order of Operations for now (can't remember if a real calculator
+  // supports Order or Op. or not)
+  
   switch (action.type) {
     case "DIGIT": {
       let trimmed = state.stringCurrentlyBeingConcatenated;
@@ -37,7 +43,6 @@ const CalcReducer = (state, action) => {
         ...state,
         stringCurrentlyBeingConcatenated: trimmed.concat(action.payload)
       };
-      break;
     }
 
     case "ADD":
@@ -49,8 +54,14 @@ const CalcReducer = (state, action) => {
           termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
           operand: action.type
         };
+      } else {
+        //We already have one term, so this is kind of like hitting the enter key
+        const newState = UpdateTermToBeApplied(state);
+        return {
+          ...newState,
+          operand: action.type
+        }
       }
-      break;
     }
 
     case "ENTER": {
@@ -59,41 +70,9 @@ const CalcReducer = (state, action) => {
           ...state
         };
       }
-      if (state.operand === "ADD") {
-        let sum =
-          state.termToBeApplied +
-          parseInt(state.stringCurrentlyBeingConcatenated);
-        return {
-          ...state,
-          termToBeApplied: sum,
-          stringCurrentlyBeingConcatenated: sum + ""
-        };
-      }
-      if (state.operand === "SUBTRACT") {
-        let difference =
-          state.termToBeApplied -
-          parseInt(state.stringCurrentlyBeingConcatenated);
-        return {
-          ...state,
-          termToBeApplied: difference,
-          stringCurrentlyBeingConcatenated: difference + ""
-        };
-      }
-
-      if (state.operand === "MULTIPLY") {
-        let product =
-          state.termToBeApplied *
-          parseInt(state.stringCurrentlyBeingConcatenated);
-        return {
-          ...state,
-          termToBeApplied: product,
-          stringCurrentlyBeingConcatenated: product + ""
-        };
-      }
-      break;
+      
+      return UpdateTermToBeApplied(state)
     }
-
-
     
     default:
       return state;
