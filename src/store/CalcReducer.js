@@ -39,7 +39,8 @@ const CalcReducer = (state, action) => {
 
     case "ADD":
     case "SUBTRACT":
-    case "MULTIPLY": {
+    case "MULTIPLY":
+    case "DIVIDE": {
       if (state.termToBeApplied === 0) {
         return {
           ...state,

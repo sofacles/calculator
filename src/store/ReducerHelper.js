@@ -30,6 +30,17 @@ const UpdateTermToBeApplied = state => {
       preparingToClearDisplayOnNextDigit: true
     };
   }
+
+  if (state.operand === "DIVIDE") {
+    let quotient =
+      state.termToBeApplied / parseInt(state.stringCurrentlyBeingConcatenated);
+    return {
+      ...state,
+      termToBeApplied: quotient,
+      stringCurrentlyBeingConcatenated: quotient + "",
+      preparingToClearDisplayOnNextDigit: true
+    };
+  }
 };
 
 export { UpdateTermToBeApplied };

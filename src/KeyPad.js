@@ -27,7 +27,7 @@ const KeyPad = () => {
             <NumberKey number={7} key={7} />
             <NumberKey number={8} key={8} />
             <NumberKey number={9} key={9} />
-            <Key text={"/"} key={"divide"} />
+            <OperationKey opCode="DIVIDE" text="/" key="divide" />
         </div>
         <div style={KeyPadRowStyle}>
             <NumberKey number={4} key={4} />

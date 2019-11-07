@@ -177,5 +177,46 @@ describe("Calculator tests", () => {
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("21");
     });
+    
+    it("0 times 7 is 0", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      let key0 = getByTestId("0key");
+      fireEvent.click(key0);
+
+      const timesKey = getByTestId("*key");
+      fireEvent.click(timesKey);
+
+      const key7 = getByTestId("7key");
+      fireEvent.click(key7);
+
+      const enterKey = queryByText("enter");
+      fireEvent.click(enterKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("0");
+    });
+  });
+
+  describe("Division: ", () => {
+    it("12 / 3 is 4", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      let key1 = getByTestId("1key");
+      fireEvent.click(key1);
+      let key2 = getByTestId("2key");
+      fireEvent.click(key2);
+
+      const divideKey = getByTestId("/key");
+      fireEvent.click(divideKey);
+
+      let key3 = getByTestId("3key");
+      fireEvent.click(key3);
+
+
+      const enterKey = queryByText("enter");
+      fireEvent.click(enterKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("4");
+    });
   });
 });
