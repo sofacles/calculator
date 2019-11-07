@@ -18,7 +18,7 @@ const Key = (props) => {
         flexBasis: "10px"
     }
     return <div 
-        style={ props.wide ? {...KeyStyle, ...doubleWideStyle} : KeyStyle  }
+        style={ KeyStyle  }
         data-testid={props.text + "key"}
         onClick={props.onPress}
         >{props.text}</div>

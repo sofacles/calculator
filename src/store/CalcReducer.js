@@ -44,7 +44,7 @@ const CalcReducer = (state, action) => {
       if (state.termToBeApplied === 0) {
         return {
           ...state,
-          termToBeApplied: parseInt(state.stringCurrentlyBeingConcatenated),
+          termToBeApplied: parseFloat(state.stringCurrentlyBeingConcatenated),
           operand: action.type,
           preparingToClearDisplayOnNextDigit: true
         };

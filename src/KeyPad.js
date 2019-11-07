@@ -44,6 +44,7 @@ const KeyPad = () => {
         <div style={KeyPadRowStyle}>
             <NumberKey number={0} key={0} />
             <EnterKey key="enter" />
+            <NumberKey number={"."} key="decimal" />
             <OperationKey text="+" opCode="ADD" key={"plus"} />
         </div>
     </div>;
