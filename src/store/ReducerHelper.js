@@ -1,4 +1,4 @@
-const UpdateleftOperand = state => {
+const UpdateLeftOperand = state => {
   if (state.operator === "ADD") {
     let sum =
       state.leftOperand +
@@ -55,4 +55,4 @@ const correctFloatParse = numberString => {
   return parseFloat(stringWithZeros);
 };
 
-export { UpdateleftOperand };
+export { UpdateLeftOperand };

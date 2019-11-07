@@ -1,4 +1,4 @@
-import {UpdateleftOperand} from "./ReducerHelper"
+import { UpdateLeftOperand } from "./ReducerHelper";
 
 /*
 If I had just typed <2>, <3>, <+> 
@@ -7,32 +7,36 @@ operator would be "plus"
 
 then when I type <2> I set leftOperand to 2
 
-then when <enter> is pressed, we'll have an action called "calculate" or something which looks at runningTotal
-and the operator and the leftOperand and does some kind of math
+then when <enter> is pressed, we'll have an action.type called "enter" or something which look at
+operator and the leftOperand and does some kind of math
 
 */
 
 const CalcReducer = (state, action) => {
-  // The "leftOperand" is the left hand side of whatever last operator is. It is the result of all the 
+  // The "leftOperand" is the left hand side of whatever last operator is. It is the result of all the
   // operations up until now.  I am ignoring Order of Operations for now (can't remember if a real calculator
   // supports Order or Op. or not)
-  
+
   switch (action.type) {
     case "DIGIT": {
       let trimmed = state.stringCurrentlyBeingConcatenated;
-      
+
       //get rid of leading zeroes
       while (trimmed[0] === "0") {
         trimmed = trimmed.slice(1);
       }
 
-      // If they've entered one term already and an operator and this is the first digit of the new term, we need to reset the 
+      // If they've entered one term already and an operator and this is the first digit of the new term, we need to reset the
       // stringCurrentlyBeingConcatenated before we append the new digit.
-      const newStringToAddTo = state.preparingToClearDisplayOnNextDigit ? "" : trimmed;
-        
+      const newStringToAddTo = state.preparingToClearDisplayOnNextDigit
+        ? ""
+        : trimmed;
+
       return {
         ...state,
-        stringCurrentlyBeingConcatenated: newStringToAddTo.concat(action.payload),
+        stringCurrentlyBeingConcatenated: newStringToAddTo.concat(
+          action.payload
+        ),
         preparingToClearDisplayOnNextDigit: false
       };
     }
@@ -50,13 +54,15 @@ const CalcReducer = (state, action) => {
           operator: action.type,
           preparingToClearDisplayOnNextDigit: true
         };
+      } else if (state.preparingToClearDisplayOnNextDigit) {
+        return { ...state, operator: action.type };
       } else {
         //We already have one term, so this is kind of like hitting the enter key
-        const newState = UpdateleftOperand(state);
+        const newState = UpdateLeftOperand(state);
         return {
           ...newState,
           operator: action.type
-        }
+        };
       }
     }
 
@@ -66,10 +72,10 @@ const CalcReducer = (state, action) => {
           ...state
         };
       }
-      
-      return UpdateleftOperand(state)
+
+      return UpdateLeftOperand(state);
     }
-    
+
     default:
       return state;
   }

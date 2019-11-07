@@ -192,7 +192,7 @@ describe("Calculator tests", () => {
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("21");
     });
-    
+
     it("0 times 7 is 0", () => {
       const { queryByText, getByTestId } = render(<Calculator />);
       let key0 = getByTestId("0key");
@@ -226,7 +226,6 @@ describe("Calculator tests", () => {
       let key3 = getByTestId("3key");
       fireEvent.click(key3);
 
-
       const enterKey = queryByText("enter");
       fireEvent.click(enterKey);
 
@@ -242,15 +241,34 @@ describe("Calculator tests", () => {
       fireEvent.click(divideKey);
 
       fireEvent.click(getByTestId(".key"));
-      fireEvent.click(getByTestId("2key"))
+      fireEvent.click(getByTestId("2key"));
       fireEvent.click(getByTestId("5key"));
-
 
       const enterKey = queryByText("enter");
       fireEvent.click(enterKey);
 
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("12");
+    });
+  });
+
+  describe("Weird user behavior ", () => {
+    it("pressing * operator twice", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      let key3 = getByTestId("3key");
+      fireEvent.click(key3);
+
+      const timesKey = getByTestId("*key");
+      fireEvent.click(timesKey);
+
+      const key7 = getByTestId("7key");
+      fireEvent.click(key7);
+
+      fireEvent.click(timesKey);
+      fireEvent.click(timesKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("21");
     });
   });
 });
