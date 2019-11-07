@@ -157,6 +157,21 @@ describe("Calculator tests", () => {
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("-2");
     });
+
+    it(".3 minus .1 is .2", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      fireEvent.click(getByTestId(".key"));
+      fireEvent.click(getByTestId("3key"));
+      fireEvent.click(getByTestId("-key"));
+
+      fireEvent.click(getByTestId(".key"));
+      fireEvent.click(getByTestId("1key"));
+
+      fireEvent.click(queryByText("enter"));
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("0.2");
+    });
   });
 
   describe("Multiplication: ", () => {
@@ -217,6 +232,25 @@ describe("Calculator tests", () => {
 
       const display = getByTestId("display");
       expect(getNodeText(display)).toEqual("4");
+    });
+
+    it("3 divided by 0.25 is 12", () => {
+      const { queryByText, getByTestId } = render(<Calculator />);
+      fireEvent.click(getByTestId("3key"));
+
+      const divideKey = getByTestId("/key");
+      fireEvent.click(divideKey);
+
+      fireEvent.click(getByTestId(".key"));
+      fireEvent.click(getByTestId("2key"))
+      fireEvent.click(getByTestId("5key"));
+
+
+      const enterKey = queryByText("enter");
+      fireEvent.click(enterKey);
+
+      const display = getByTestId("display");
+      expect(getNodeText(display)).toEqual("12");
     });
   });
 });

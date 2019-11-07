@@ -1,46 +1,58 @@
-const UpdateTermToBeApplied = state => {
-  if (state.operand === "ADD") {
+const UpdateleftOperand = state => {
+  if (state.operator === "ADD") {
     let sum =
-      state.termToBeApplied + parseInt(state.stringCurrentlyBeingConcatenated);
+      state.leftOperand +
+      correctFloatParse(state.stringCurrentlyBeingConcatenated);
     return {
       ...state,
-      termToBeApplied: sum,
+      leftOperand: sum,
       stringCurrentlyBeingConcatenated: sum + "",
       preparingToClearDisplayOnNextDigit: true
     };
   }
-  if (state.operand === "SUBTRACT") {
-    let difference =
-      state.termToBeApplied - parseInt(state.stringCurrentlyBeingConcatenated);
+  if (state.operator === "SUBTRACT") {
+    let difference = correctFloatParse(
+      state.leftOperand - state.stringCurrentlyBeingConcatenated
+    );
     return {
       ...state,
-      termToBeApplied: difference,
+      leftOperand: difference,
       stringCurrentlyBeingConcatenated: difference + "",
       preparingToClearDisplayOnNextDigit: true
     };
   }
 
-  if (state.operand === "MULTIPLY") {
+  if (state.operator === "MULTIPLY") {
     let product =
-      state.termToBeApplied * parseInt(state.stringCurrentlyBeingConcatenated);
+      state.leftOperand *
+      correctFloatParse(state.stringCurrentlyBeingConcatenated);
     return {
       ...state,
-      termToBeApplied: product,
+      leftOperand: product,
       stringCurrentlyBeingConcatenated: product + "",
       preparingToClearDisplayOnNextDigit: true
     };
   }
 
-  if (state.operand === "DIVIDE") {
+  if (state.operator === "DIVIDE") {
     let quotient =
-      state.termToBeApplied / parseInt(state.stringCurrentlyBeingConcatenated);
+      state.leftOperand /
+      correctFloatParse(state.stringCurrentlyBeingConcatenated);
     return {
       ...state,
-      termToBeApplied: quotient,
+      leftOperand: quotient,
       stringCurrentlyBeingConcatenated: quotient + "",
       preparingToClearDisplayOnNextDigit: true
     };
   }
 };
 
-export { UpdateTermToBeApplied };
+const correctFloatParse = numberString => {
+  let withTrailingZeros = parseFloat(numberString).toPrecision(8);
+  //Now we might end up with something like 0.20000000000, so convert to string and remove trailing zeros
+  let stringWithZeros = withTrailingZeros + "";
+  stringWithZeros = stringWithZeros.trimRight("0");
+  return parseFloat(stringWithZeros);
+};
+
+export { UpdateleftOperand };
