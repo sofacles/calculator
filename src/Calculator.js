@@ -5,8 +5,12 @@ import { CalculatorContextProvider } from "./CalculatorContext";
 
 const Calculator = () => {
   const calculatorStyle = {
+    backgroundColor: "#666",
+    border: "1px solid black",
+    borderRadius: "6px",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    padding: "10px",
   };
 
   return (
