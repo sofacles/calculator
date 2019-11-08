@@ -12,12 +12,12 @@ const Key = (props) => {
         borderRadius: "2px",
         display: "flex",
         justifyContent: "center",
-        padding: "10px",
         margin: "3px",
-        flexGrow: "1",
-        flexBasis: "10px"
+        padding: "8px 0",
+        flex: "1 1 0",
     }
     return <div 
+    
         style={ KeyStyle  }
         data-testid={props.text + "key"}
         onClick={props.onPress}

@@ -6,7 +6,7 @@ import Key from "./Key";
 
 const KeyPad = () => {
     const CalculatorStyle = {
-        width: "200px"
+        width: "240px"
     };
 
     const KeyPadRowStyle = {
