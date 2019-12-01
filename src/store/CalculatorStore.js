@@ -3,7 +3,7 @@ import { createStore } from "redux";
 const initialState = {
   operand: 0,
   operator: "",
-  stringBeingDisplayed: ""
+  stringBeingDisplayed: "0"
 };
 const CalculatorStore = createStore((state = initialState, action) => {
   switch (action.type) {

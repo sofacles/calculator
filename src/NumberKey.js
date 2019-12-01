@@ -1,23 +1,20 @@
 import React, { useContext } from "react";
-import { calculatorContext } from "./CalculatorContext";
+import { connect } from "react-redux";
 import Key from "./Key";
 
-
 class NumberKey extends React.Component {
-   constructor(props) {
-    super(props);
-   }
-
-    onPress () {
-        dispatch({ type: "DIGIT", payload: props.number});
-    };
-
-    render() {
-        return <>
-         <Key onPress={onPress} text={props.number} />
-    </>;
-    }
-    
+  render() {
+    return <Key onPress={this.props.onNumberKey} text={this.props.number} />;
+  }
 }
-
-export default NumberKey;
+const mapStateToProps = function(state) {
+  return { stringToDisplay: state.stringBeingDisplayed };
+};
+const mapDispatchToProps = function(dispatch, props) {
+  return {
+    onNumberKey: () => {
+      dispatch({ type: "numberKey", payload: props.number });
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NumberKey);
