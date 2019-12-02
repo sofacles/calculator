@@ -2,10 +2,10 @@ import React, { useContext} from "react";
 import Key from "./Key";
 import { connect } from "react-redux";
 
-const OperationKey = (props) => {
+const OperationKey = ({text, doOperation}) => {
     return (
         <>
-            <Key text={props.text} onPress={doOperation} />
+            <Key text={text} onPress={doOperation} />
         </>
     );
 };

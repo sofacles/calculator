@@ -13,7 +13,7 @@ const Calculator = ({ stringToDisplay }) => {
 };
 
 const mapStateToProps = function(state) {
-  return { stringToDisplay: state.stringBeingDisplayed };
+  return { stringToDisplay: state.stringCurrentlyBeingConcatenated };
 };
 
 export default connect(mapStateToProps)(Calculator);

@@ -1,5 +1,6 @@
 import React from "react";
 import NumberKey from "./NumberKey";
+import OperationKey from "./OperationKey";
 
 const KeyPad = () => {
   const CalculatorStyle = {
@@ -36,11 +37,11 @@ const KeyPad = () => {
         <NumberKey number={3} key={3} />
       </div>
       <div style={KeyPadRowStyle}>
-            <NumberKey number={0} key={0} />
-            {/* <EnterKey key="enter" />
+        <NumberKey number={0} key={0} />
+        {/* <EnterKey key="enter" />
             <NumberKey number={"."} key="decimal" /> */}
-            <OperationKey text="+" opCode="ADD" key={"plus"} />
-        </div>
+        <OperationKey text="+" opCode="ADD" key={"plus"} />
+      </div>
     </div>
   );
 };
