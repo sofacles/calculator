@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { connect } from "react-redux";
 import Key from "./Key";
 
-class NumberKey extends React.Component {
-  render() {
-    return <Key onPress={this.props.onNumberKey} text={this.props.number} />;
-  }
-}
+const NumberKey = props => {
+  return <Key onPress={props.onNumberKey} text={props.number} />;
+};
+
 const mapStateToProps = function(state) {
   return { stringToDisplay: state.stringBeingDisplayed };
 };
