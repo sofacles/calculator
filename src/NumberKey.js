@@ -12,7 +12,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch, props) {
   return {
     onNumberKey: () => {
-      dispatch({ type: "numberKey", payload: props.number });
+      dispatch({ type: "DIGIT", payload: props.number });
     }
   };
 };

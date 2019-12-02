@@ -2,13 +2,32 @@ import { createStore } from "redux";
 import initializeState from "./InitialState";
 import { UpdateLeftOperand } from "./ReducerHelper";
 
+const CalcReducer = (state = initializeState(), action) => {
+  // The "leftOperand" is the left hand side of whatever last operator is. It is the result of all the
+  // operations up until now.  I am ignoring Order of Operations for now (can't remember if a real calculator
+  // supports Order or Op. or not)
 
-const CalculatorStore = createStore((state = initializeState(), action) => {
   switch (action.type) {
-    case "numberKey": {
+    case "DIGIT": {
+      let trimmed = state.stringCurrentlyBeingConcatenated;
+
+      //get rid of leading zeroes
+      while (trimmed[0] === "0") {
+        trimmed = trimmed.slice(1);
+      }
+
+      // If they've entered one term already and an operator and this is the first digit of the new term, we need to reset the
+      // stringCurrentlyBeingConcatenated before we append the new digit.
+      const newStringToAddTo = state.preparingToClearDisplayOnNextDigit
+        ? ""
+        : trimmed;
+
       return {
         ...state,
-        stringCurrentlyBeingConcatenated: state.stringCurrentlyBeingConcatenated.concat(action.payload)
+        stringCurrentlyBeingConcatenated: newStringToAddTo.concat(
+          action.payload
+        ),
+        preparingToClearDisplayOnNextDigit: false
       };
     }
 
@@ -37,9 +56,22 @@ const CalculatorStore = createStore((state = initializeState(), action) => {
       }
     }
 
+    case "ENTER": {
+      if (state.operator === "") {
+        return {
+          ...state
+        };
+      }
+
+      return UpdateLeftOperand(state);
+    }
+
     default:
       return state;
   }
-});
+};
 
-export { CalculatorStore };
+
+const CalculatorStore = createStore(CalcReducer);
+
+export default CalculatorStore;
